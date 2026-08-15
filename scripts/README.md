@@ -47,11 +47,12 @@ pip install pyjwt cryptography requests
 ```
 
 Generate an App Store Connect API key: **App Store Connect → Users and Access →
-Integrations → App Store Connect API → Generate**. **The key's role must be Admin.**
-Narrower roles (Developer, Marketing, "Sales and Reports", etc.) will 403 on the
-endpoints these scripts need — Sales/Analytics report requests both require Admin
-specifically. Your own account being Admin doesn't matter; it's the role assigned
-to the key itself.
+Integrations → App Store Connect API → Generate**. **Give it access to Sales and
+Analytics reporting** (Apple calls this tier "Admin" in the role picker). Narrower
+roles (Developer, Marketing, "Sales and Reports," etc.) will 403 on the endpoints
+these scripts need — Sales and Analytics report requests specifically require that
+tier. Your own account's role doesn't matter here; it's the role assigned to the
+key itself that gates these calls.
 
 Set environment variables (never commit the `.p8` file):
 
@@ -103,5 +104,6 @@ for actual subscription/IAP activity.
   from env vars or `--app-id`.
 - `.gitignore` already excludes `scripts/*.p8` and `scripts/asc_reports/` — keep it
   that way if you fork this.
-- The Admin-role requirement is a real Apple constraint, not a script limitation —
-  there's no narrower role that covers both Sales Reports and metadata writes.
+- Needing access to Sales and Analytics reporting is a real Apple constraint, not
+  a script limitation — there's no narrower key role that covers both report
+  types these scripts pull.

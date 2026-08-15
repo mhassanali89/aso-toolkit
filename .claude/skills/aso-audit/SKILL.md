@@ -82,9 +82,10 @@ Connect API key, say so plainly and keep going in this mode — the research
 and validation tooling still works, in full, with their consent understood
 as "skip the live-account tier."
 
-**App Store Connect credentials required (Admin-role key)** —
-`pull_asc_analytics.py` and `pull_asc_sales.py` (this repo) and
-`push_aso_metadata.py` (the companion uploader repo). These need real
+**App Store Connect credentials required (key with Sales and Analytics
+reporting access)** — `pull_asc_analytics.py` and `pull_asc_sales.py` (this
+repo) and `push_aso_metadata.py` (the companion uploader repo, which needs
+metadata-write access specifically). These need real
 account access because they do something the no-credentials tier
 structurally cannot: read *this specific app's* actual live metadata and
 real performance history, and write verified changes back. The reason to
@@ -830,8 +831,8 @@ No App Store Connect credentials needed — public Apple data + local logic:
   for a term), `validate` (character limits + cross-field word-stem
   duplication, no network call at all).
 
-Requires an **Admin-role** App Store Connect API key (read-only — pulls
-data, never writes):
+Requires an App Store Connect API key with **Sales and Analytics reporting
+access** (read-only — pulls data, never writes):
 - `scripts/asc_client.py` — shared JWT auth. Narrower key roles 403 on
   report requests and metadata writes.
 - `scripts/pull_asc_analytics.py` — impressions/conversion (forward-only,

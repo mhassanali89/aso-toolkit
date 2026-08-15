@@ -61,7 +61,7 @@ instead:
 | **Title/Subtitle/Keywords validation** (limits, duplication) | ✅ | ✅ |
 | **Audit against *your app's* actual live metadata** | — | ✅ |
 | **Real download/subscription history**, back to launch | — | ✅ |
-| **Setup required** | `pip install requests` | Above, plus an Admin-role API key |
+| **Setup required** | `pip install requests` | Above, plus an API key with access to Sales and Analytics reporting |
 
 Why ask for App Store Connect access at all, if the left column already
 works? Accuracy. The no-credentials tier tells you about the market — what
@@ -122,7 +122,11 @@ Connect your account — five minutes, done once:
    Connect API** ([direct link](https://appstoreconnect.apple.com/access/integrations/api)).
 2. Click **Generate API Key** (or the **+** button if you already have
    other keys).
-3. Give it a name, set **Access** to **Admin**, click **Generate**.
+3. Give it a name, and for **Access** choose the tier that includes
+   **Sales and Analytics reporting** (Apple labels this option "Admin" in
+   the role picker — the name refers to Apple's own permission tiers, not
+   anything this toolkit asks for beyond what the reports themselves
+   require), then click **Generate**.
 4. Grab three things off that page:
    - **Issuer ID** — shown at the top of the Keys tab, the same for every
      key on the account, not just this one.
@@ -153,8 +157,8 @@ export ASC_VENDOR_NUMBER=12345678                              # Reports -> Sale
 |---|---|---|
 | `scripts/keyword_research.py` | Keyword scoring, competitor lookup, and local Title/Subtitle/Keywords validation — all via Apple's public iTunes Search API plus local logic. | No |
 | `scripts/asc_client.py` | Shared JWT auth + a thin API wrapper. Everything below imports this. | — |
-| `scripts/pull_asc_analytics.py` | Impressions / product page views / conversion. **Forward-only — no historical backfill**, see script docstring. | Yes (Admin) |
-| `scripts/pull_asc_sales.py` | Real download and subscription/revenue history, back to app launch. | Yes (Admin) |
+| `scripts/pull_asc_analytics.py` | Impressions / product page views / conversion. **Forward-only — no historical backfill**, see script docstring. | Yes |
+| `scripts/pull_asc_sales.py` | Real download and subscription/revenue history, back to app launch. | Yes |
 | `.claude/skills/aso-audit/SKILL.md` | The full ASO methodology as a [Claude Code skill](https://docs.claude.com/en/docs/claude-code/skills), scoped specifically to Title/Subtitle/Keywords — covers both auditing an existing app's live metadata and building initial ASO for a brand-new listing, in both credential tiers. Drop this repo's `.claude/skills/` folder into your own project and Claude Code uses it automatically when asked to review ASO. Useful as a written methodology even if you don't use Claude Code. |
 
 Ready to write the changes you've decided on? That's
