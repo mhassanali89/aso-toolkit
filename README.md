@@ -1,4 +1,4 @@
-# ASO Toolkit
+# Premium ASO Toolkit completely Free
 
 Scripts and a reusable [Claude Code](https://claude.com/claude-code) skill for
 **auditing** an iOS/macOS app's App Store Connect presence — pulling your
