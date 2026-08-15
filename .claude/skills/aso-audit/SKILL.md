@@ -1,238 +1,778 @@
 ---
 name: aso-audit
-description: Audit and update an app's App Store Connect metadata (Title, Subtitle, Keywords, Promotional Text, Description) using real App Store Connect data as evidence rather than guessing. Use when the user asks to review/optimize ASO before shipping a build, asks for keyword or metadata suggestions, wants a new locale added, or is setting up a brand-new listing.
+description: Perform end-to-end App Store Optimization for new or existing apps, focused on App Store Connect App Name/Title, Subtitle, and Keywords. For existing apps, audit current metadata against real App Store Connect and available ASO data, preserve what works, identify justified optimization opportunities, and produce the final metadata to ship. For new apps, research the market, competitors, search intent, and keyword opportunities to build the initial ASO strategy. Use when reviewing, optimizing, auditing, or preparing ASO metadata before a release or when setting up a new listing.
 ---
 
-# ASO audit and metadata push
+# ASO Audit & Optimization
 
-A methodology for App Store ASO decisions grounded in real data pulled from
-the App Store Connect API, not keyword-volume tools, generic "best practice"
-lists, or guesswork. Applies to an established app being audited before a
-new release, a brand-new listing being set up for the first time, or a new
-locale being added to an existing one — the "pull real data first, change
-only with a defensible reason" posture holds in all three cases; only the
-baseline you're comparing against differs (existing live copy vs. nothing
-yet).
+You are an ASO decision-making agent, not a generic keyword generator.
 
-## The job is an audit, not a rewrite
+Your responsibility is to **get the app's ASO done**.
 
-For an app with existing live metadata, the default posture is **KEEP unless
-there's a specific, defensible reason to change something.** Do not propose
-a fresh keyword strategy from theory. Do not touch a field just because a
-character budget has room left — an unused character costs nothing; a
-wrong-intent keyword or a stem-duplicated word actively wastes indexed space
-that a real term could have used.
+The scope of this skill is strictly:
 
-Every change you propose must trace to one of:
-1. A structural defect you can point to concretely (duplicate word-stem
-   between Title and Subtitle, a malformed/garbled keyword entry, wrong
-   script for the locale, a word from the wrong language sitting in a field,
-   a keyword implying a feature the app doesn't have).
-2. Real ASC data (downloads, subscriber events, territory concentration) —
-   see below for what's actually retrievable and what isn't.
-3. An objectively new fact with no possible historical precedent (e.g. a
-   new platform launching this release — nobody could have searched for it
-   before now, so the absence of historical evidence isn't evidence against it).
+1. App Name / Title
+2. Subtitle
+3. Keyword field
 
-If none of the three apply, say "no defect found, KEEP" and move on. A
-locale's keyword field sitting well under the character limit with no bad
-terms in it is a finished result, not an unfinished one.
+Do NOT optimize or modify:
 
-**For a brand-new listing or locale**, there's no existing copy to default
-to keeping, so the bar shifts: every field needs to be earned from real
-competitor research and verified app features, not filled to look complete.
-Still pull whatever real data exists (competitor listings, category
-conventions) rather than writing from pure instinct.
+- Description
+- Promotional Text
+- Screenshots
+- App previews
+- Category
 
-## Step 1 — pull real ground truth before doing anything
+Those are outside the scope of this skill.
 
-Never trust a prior planning doc, a "locked" table written earlier, or
-memory of the app's metadata as if it were live. Pull the actual current
-state from the API every time — planning docs and human memory both drift
-from what's really live, sometimes substantially, and there's no way to
-know how much until you check:
+The agent must support two fundamentally different situations:
+
+- **NEW APP:** build ASO from research and evidence.
+- **EXISTING APP:** audit and optimize the existing ASO using historical evidence.
+
+The objective is not to maximize keyword count or search volume.
+
+The objective is:
+
+**Relevant Discovery + Search Visibility + Conversion Potential**
+
+while maintaining accurate product positioning.
+
+---
+
+# Core principle
+
+Do not behave like a keyword suggestion engine.
+
+Do not give the user a large list of keywords and ask them to choose.
+
+The workflow is:
+
+**Research → Audit → Analyze → Reason → Decide → Validate → Final ASO**
+
+The agent is responsible for making the final decision.
+
+Every meaningful recommendation must have a defensible reason.
+
+Clearly distinguish:
+
+- Facts
+- Observations
+- Hypotheses
+- Recommendations
+- Confidence
+
+Never manufacture evidence.
+
+If the available data is insufficient, explicitly state that limitation.
+
+---
+
+# Step 0 — Determine the ASO mode
+
+Before doing the analysis, determine whether this is:
+
+### NEW APP
+
+There is no meaningful existing ASO baseline or historical performance.
+
+OR:
+
+### EXISTING APP
+
+The app already has live metadata, historical downloads/performance, or an established ASO strategy.
+
+Do not use the same methodology for both.
+
+---
+
+# MODE A — NEW APP
+
+For a new app, there is no historical keyword performance to preserve.
+
+The agent must build the ASO strategy from the ground up.
+
+## A1. Understand the product
+
+Inspect the available project/app information and establish:
+
+- What the app actually does
+- Core features
+- Primary user
+- Primary problem solved
+- Main use cases
+- Key differentiators
+- Product category
+- Features that users are likely to search for
+
+Do not invent capabilities.
+
+Every keyword must be compatible with the actual product.
+
+---
+
+## A2. Research competitors
+
+Identify relevant:
+
+- Direct competitors
+- Search competitors
+- Category competitors
+- Established leaders
+
+Analyze:
+
+- Titles
+- Subtitles
+- Keyword themes
+- Positioning
+- Search intent
+- Product vocabulary
+- Common terminology
+- Differentiation
+
+Competitors are evidence of market language, not templates to copy.
+
+---
+
+## A3. Build the keyword universe
+
+Generate candidate search terms based on:
+
+- Product category
+- User problems
+- Use cases
+- Features
+- Benefits
+- Search intent
+- Competitor vocabulary
+- Long-tail searches
+- Relevant synonyms
+- Natural user language
+
+Cluster keywords by intent.
+
+For example:
+
+- Category intent
+- Problem intent
+- Feature intent
+- Use-case intent
+- Audience intent
+- High-commercial-intent searches
+
+---
+
+## A4. Evaluate keyword opportunities
+
+Evaluate candidate keywords using:
+
+- Relevance
+- Search intent
+- Search demand
+- Competition
+- Ranking difficulty
+- Product fit
+- Conversion potential
+- Commercial value
+
+Do not simply choose the highest-volume keywords.
+
+For a new app, prioritize **realistic opportunities where the app can establish relevance and ranking**.
+
+---
+
+## A5. Build the final metadata
+
+Create the strongest combined:
+
+**Title + Subtitle + Keyword field**
+
+Do not optimize each field independently.
+
+The combination should maximize:
+
+- Discoverability
+- Search coverage
+- Search intent
+- Positioning
+- Natural language
+- Conversion potential
+
+Avoid unnecessary duplication between Title, Subtitle, and Keywords.
+
+Produce ONE final recommended configuration.
+
+Do not dump dozens of alternatives on the user.
+
+---
+
+# MODE B — EXISTING APP
+
+For an existing app, the current ASO is the baseline.
+
+Do NOT restart ASO from scratch.
+
+The default is not:
+
+> "Find completely new keywords."
+
+The default is:
+
+> **"Determine whether the existing ASO is working, identify what can be improved, and change only what has a defensible reason."**
+
+However, this does NOT mean being artificially conservative.
+
+If evidence shows that the Title, Subtitle, or Keywords should change, change them.
+
+---
+
+# Step 1 — Pull live App Store Connect metadata
+
+Never trust:
+
+- Memory
+- Previous planning documents
+- Old spreadsheets
+- Previously generated recommendations
+- A "locked" ASO table
+
+as the current source of truth.
+
+Always pull the actual current metadata from App Store Connect.
+
+Inspect:
+
+- App Name / Title
+- Subtitle
+- Keywords
+
+Inspect all relevant locales.
+
+For example:
 
 ```bash
 cd scripts
 python3 - <<'PY'
 from asc_client import Client
+
 c = Client()
 app_id = "<ASC_APP_ID>"
 
-# Title/Subtitle (shared across platforms) — check EVERY appInfo record,
-# there is usually a READY_FOR_SALE one (what's actually live) and a
-# PREPARE_FOR_SUBMISSION one (the draft you'd edit for the next release).
 for info in c.get(f"/apps/{app_id}/appInfos")["data"]:
     print(info["id"], info["attributes"]["appStoreState"])
-    for loc in c.get(f"/appInfos/{info['id']}/appInfoLocalizations")["data"]:
-        a = loc["attributes"]
-        print(" ", a["locale"], repr(a["name"]), repr(a["subtitle"]))
 
-# Keywords/Description/PromoText/WhatsNew — per platform version
-for v in c.get(f"/apps/{app_id}/appStoreVersions", params={"limit": 50})["data"]:
-    print(v["id"], v["attributes"]["platform"], v["attributes"]["versionString"],
-          v["attributes"]["appStoreState"])
+    for loc in c.get(
+        f"/appInfos/{info['id']}/appInfoLocalizations"
+    )["data"]:
+        a = loc["attributes"]
+        print(
+            a["locale"],
+            repr(a["name"]),
+            repr(a["subtitle"])
+        )
 PY
 ```
 
-Concretely, this check catches things a planning doc never will: a locale
-whose Title/Subtitle is still an untranslated placeholder from setup, a
-keyword field with garbled entries from a bad copy-paste, or metadata that
-simply drifted from whatever was last "decided" weeks or months ago because
-someone edited it directly in App Store Connect since. None of that is
-visible without pulling live data first.
+Also inspect the current keyword metadata for each relevant app-store version/localization.
 
-## Step 2 — real performance data: what you can and can't get
+The live App Store state is the baseline.
 
-Two different APIs, with a critical difference in how far back they reach:
+---
 
-- **Analytics Reports API** (impressions, product page views, conversion
-  rate) — `pull_asc_analytics.py`. This is an ONGOING subscription: it only
-  captures data from the moment you first create the report request
-  *forward*. **It does not backfill history**, not even a day of it. If
-  this is the first time a report request has been created for the app, you
-  have zero historical impression data available via API, full stop — say
-  so plainly rather than working around it.
-- **Sales Reports API** (downloads, revenue, subscriptions) —
-  `pull_asc_sales.py`. This one has full history from app launch, because
-  Apple generates these regardless of whether anyone asked. Needs
-  `ASC_VENDOR_NUMBER` (App Store Connect → Reports → Sales and Trends, shown
-  at the top of the page).
+# Step 2 — Pull available performance data
 
-**A gotcha worth knowing before you go looking for revenue data:**
-subscription/IAP revenue does **not** appear in the `SALES`/`SUMMARY` report
-— only base-app unit downloads do. An empty result there is not evidence of
-zero revenue; it's evidence of the wrong report. Use the `SUBSCRIBER` report
-(daily-only, no weekly/monthly option) for real subscription events. If a
-finding as significant as "this app has zero revenue" comes up, that's
-exactly the moment to double-check via a second method before stating it as
+Use App Store Connect data wherever available.
+
+Potential evidence includes:
+
+- Downloads
+- Impressions
+- Product page views
+- Conversion rate
+- Acquisition sources
+- Territories
+- Platform/device
+- Subscription events
+- Revenue where available
+- Search/discovery data where available
+
+Understand the limitations of Apple's APIs.
+
+Do not claim that Apple provides per-keyword organic ranking or keyword impression data if it does not.
+
+If external ASO tooling provides:
+
+- Keyword ranking
+- Search volume
+- Search popularity
+- Difficulty
+- Competition
+
+clearly identify it as external/estimated data.
+
+Do not present an estimate as actual App Store performance.
+
+**A specific trap to know about:** the Sales Reports API's `SALES`/`SUMMARY`
+report does not error or warn when queried for subscription/IAP data — it
+silently returns rows for base-app downloads only, with nothing for
+subscription products. That reads exactly like "zero subscription revenue"
+if you don't already know to check elsewhere. Subscription/IAP events live
+in the separate `SUBSCRIBER` report (daily-only, no weekly/monthly option).
+If a finding as significant as "this app has no revenue" comes up, that's
+the moment to confirm you queried the right report before stating it as
 fact.
 
-**What Apple does not expose to anyone, in any channel:** per-keyword
-impression or ranking data for the organic Keywords field. Not via API, not
-via the App Store Connect UI. If asked to say which keyword is "close to
-ranking well," say clearly that this specific number doesn't exist anywhere
-— don't approximate it with a keyword-volume tool and present it as the
-app's own performance data. Apple Search Ads "Search Popularity" is a demand
-signal, not a performance number, and only covers paid-campaign search
-terms, not the organic Keywords field.
+---
 
-## Step 3 — the actual audit, field by field
+# Important App Store Connect Analytics limitation
 
-**Title.** Almost never worth changing on an established app. It's the
-highest-weight search field and the most user-facing — a full rewrite risks
-resetting accumulated ranking signal for a marginal keyword gain. Only touch
-it for a concrete defect (untranslated placeholder, wrong script) or an
-explicit repositioning request.
+The Analytics Reports API is forward-only for reports that must be subscribed to.
 
-**Subtitle.** Check for stem-duplication with Title first (e.g. Title ends
-in a word like "Notes," Subtitle contains the same stem again) — same
-indexed stem, wasted space. Fix only that specific overlap; don't rewrite
-the rest.
+It does not magically provide historical data from before the report request existed.
 
-**Keywords.** This is where real defects hide, and they're mechanical, not
-strategic:
-- Redundant stems within the same field (two forms of the same root word)
-  — keep one, not both.
-- A phrase sliced into meaningless single-word fragments by stray commas —
-  a multi-word phrase like "voice notes" accidentally split into "voice",
-  "notes" as two separate list entries when it should have stayed one
-  phrase (or vice versa: single words wrongly merged). Reconstruct what a
-  person would actually type.
-- Wrong script for the locale (e.g. Simplified characters under a
-  Traditional Chinese field).
-- A word from a different language entirely sitting in the field.
-- Stray whitespace inside a term that breaks an exact brand match (a
-  competitor's name with an accidental space in it won't match anyone
-  searching the real name).
-- Grammatical fragments, not real search terms (verb-conjugation endings or
-  particles that no one would type into search on their own).
-- A keyword implying a feature the app doesn't actually have — verify
-  against the app's real feature set before adding anything, not just
-  before removing something. A keyword that draws in the wrong searcher
-  intent (someone looking for a feature this app doesn't do) converts
-  worse than an unused character.
+If the required analytics report was not previously subscribed to, do not pretend that one year of impression/conversion history can be reconstructed through that API.
 
-**Competitor names in Keywords — the correct lens.** Two opposite mistakes
-are both easy to make here:
-- *Too narrow:* dropping a competitor name because its core mechanism
-  differs from this app's (e.g. a handwriting note-taking app kept out of
-  the list for an app that does AI audio transcription). Wrong lens — if
-  both apps are competing for the same "which app in this category do I
-  install" decision in a searcher's head, they're the same race and the
-  keyword is valid. Judge by the category the searcher is shopping in, not
-  by feature-level mechanism matching.
-- *Too aggressive:* dropping small/niche competitor names on the theory
-  that their owner defends the exact-match term with paid search ads, so
-  organic ranking under it has poor payback. This is a real, legitimate
-  consideration for *new* keyword candidates you're deciding whether to add
-  — but it's a guess about ad behavior that can't be verified, and applying
-  it to remove long-standing live keywords with an actual track record
-  violates the KEEP-bias rule. Absence of proof isn't proof of absence.
-- A competitor name that can't be verified as a real app (no matching store
-  listing found) is worth flagging, but don't remove it unilaterally if
-  it's already live — you can't prove a negative, and removing a term that
-  happens to work anyway is a real cost with no offsetting evidence.
+Use other available first-party data where applicable, such as Sales Reports, but understand exactly what each report contains.
 
-**Promotional Text.** Free to edit any time, even on an already-live
-version, no App Review needed. If it's empty, that's close to always worth
-filling — unused real estate with essentially no downside. A platform
-launch (new OS, new device class) is a good, low-risk, always-justified
-reason to write one even with zero historical data, for the same
-can't-have-evidence-for-a-thing-that-didn't-exist-yet reason platform
-keywords are justified.
+For example:
 
-**Description.** Apple does not index this for search — only conversion.
-Don't touch it without a specific, stated reason; "already comprehensive and
-accurate" is a legitimate reason to leave it alone.
+- Sales reports can provide historical downloads.
+- Subscriber reports can provide subscription-related events.
+- Analytics reports provide metrics such as impressions/product page views/conversion only for data captured by the relevant analytics report subscription.
 
-**Screenshots.** Can't be judged from data available via this API — no
-impression/conversion breakdown by screenshot exists. Check
-programmatically whether each locale *has* a screenshot set at all
-(`GET /appStoreVersionLocalizations/{id}/appScreenshotSets` →
-`.../{setId}/appScreenshots`) — a locale with zero screenshots is a hard
-submission blocker you can catch this way, distinct from judging whether
-existing screenshots are good.
+If the required historical data is unavailable:
 
-## Step 4 — present findings, then push only with explicit confirmation
+**say so explicitly and adjust the confidence of the recommendation.**
 
-Show every proposed change as a before/after pair, grouped by locale, before
-touching anything. The actual write is a separate tool on purpose — this
-skill's scripts only ever read from App Store Connect. Use
-[`push_aso_metadata.py`](https://github.com/mhassanali89/appstore-connect-metadata-uploader)
-for the write step — it already enforces this: full diff first,
-character-limit validation, explicit confirmation prompt (or `--yes` if the
-user has said to just proceed).
+---
 
-Never invent a value to fill a blank field "for completeness" — leave it
-blank and say what's missing (e.g. "no promo text drafted yet for these
-locales") rather than writing something to make a report look more
-finished.
+# Step 3 — Audit the existing Title
 
-## Common pitfalls
+The Title must be actively evaluated.
 
-1. Trusting a "locked" table or planning doc as if it were live metadata,
-   without pulling the real current state first. It frequently won't match
-   — see Step 1.
-2. Character-count errors from hand-tracing Unicode strings — always
-   validate with `len()` in a script, never by eye, especially for
-   CJK/Arabic/Vietnamese diacritics.
-3. Concluding "zero revenue" (or any major finding) from a single query
-   without checking whether it's actually the right report/endpoint for
-   that data — see the Sales vs. Subscriber report gotcha in Step 2.
-4. Removing a competitor keyword using too literal a definition of
-   "competitor" — same search category and audience is the right test, not
-   whether the underlying mechanism matches.
-5. Adding a keyword that sounds plausible for the app's category without
-   verifying it against the app's actual feature set — a keyword implying a
-   feature the app doesn't have pulls in the wrong searcher intent, which
-   converts worse than leaving the space unused.
-6. Treating "fill every field to the character limit" as the goal. It
-   isn't — a real, justified term left unused space is a better result than
-   a filler term that used it. Character utilization is a byproduct of
-   finding real terms, never a target to hit for its own sake.
+Do NOT assume:
 
-## Scripts this skill uses
+> "Human ASO person created it, therefore it is correct."
+
+And do NOT assume:
+
+> "It has room for more keywords, therefore it should change."
+
+Evaluate:
+
+### Search relevance
+
+Does it target valuable search intent?
+
+### Product relevance
+
+Does the app actually satisfy the search?
+
+### Discoverability
+
+Does the title target meaningful search demand?
+
+### Positioning
+
+Does it clearly communicate what the app is?
+
+### Conversion
+
+Would the wording make sense and appeal to a searcher?
+
+### Keyword efficiency
+
+Are valuable terms being used?
+
+### Duplication
+
+Does the subtitle unnecessarily repeat title terms?
+
+### Competitive positioning
+
+Does the title fit the category while providing differentiation?
+
+### Risk
+
+Would changing the title unnecessarily disrupt established positioning?
+
+Then make a decision:
+
+**KEEP** or **CHANGE**
+
+Do not change the title simply because another keyword has higher estimated volume.
+
+But equally, do not preserve a weak title merely because it is old.
+
+---
+
+# Step 4 — Audit the Subtitle
+
+Evaluate the Subtitle independently and together with the Title.
+
+Check:
+
+- Search intent
+- Keyword value
+- Product relevance
+- User benefit
+- Conversion potential
+- Keyword duplication
+- Character efficiency
+- Positioning
+- Natural language
+
+The Title + Subtitle should work as one system.
+
+Avoid wasting both fields on the same keyword stems unless there is a strong reason.
+
+Make a final KEEP/CHANGE decision.
+
+---
+
+# Step 5 — Audit the Keyword field
+
+Audit every current keyword.
+
+Classify terms as:
+
+### KEEP
+
+Strong, relevant, useful, or strategically important.
+
+### EXPAND
+
+A successful concept has valuable adjacent terms.
+
+### REPLACE
+
+A weak term has a clearly better opportunity.
+
+### REMOVE
+
+Redundant, irrelevant, malformed, or otherwise low-value.
+
+### TEST
+
+Potentially valuable but insufficient evidence exists.
+
+Look specifically for:
+
+- Duplicate word stems
+- Redundant synonyms
+- Incorrect language
+- Incorrect script
+- Broken terms
+- Bad comma separation
+- Grammatically unnatural fragments
+- Irrelevant terms
+- Features the app does not support
+- Search intent mismatches
+- Missing valuable concepts
+- Relevant long-tail opportunities
+- Competitor/category terms where appropriate
+
+Do not treat filling the keyword field to the maximum character limit as the goal.
+
+A justified keyword field with unused space is better than filler.
+
+---
+
+# Competitor keyword rule
+
+Competitor terms require contextual judgment.
+
+Do not automatically remove a competitor keyword because the competitor has a different technical implementation.
+
+The relevant question is:
+
+> **Would the same searcher reasonably consider both apps when deciding what app to install?**
+
+If yes, they may compete for the same search intent.
+
+However, do not blindly add competitor names either.
+
+Evaluate:
+
+- Search intent
+- Product/category relevance
+- Competitive strength
+- Potential commercial value
+- Risk
+- Evidence
+
+For existing live competitor keywords, preserve them unless there is a defensible reason to remove them.
+
+---
+
+# Step 6 — Identify actual optimization opportunities
+
+After auditing the current metadata, explicitly answer:
+
+## What is already working?
+
+Protect it.
+
+## What is weak?
+
+Identify it.
+
+## What is missing?
+
+Identify meaningful gaps.
+
+## What can realistically improve?
+
+Prioritize opportunities.
+
+## What should NOT change?
+
+Explicitly state this.
+
+The agent must be willing to conclude:
+
+> **No meaningful change required. KEEP CURRENT.**
+
+But it must also be willing to make substantial changes when evidence justifies them.
+
+---
+
+# Existing ASO decision hierarchy
+
+When deciding whether to change an existing field, use this order of evidence:
+
+1. Actual first-party App Store performance
+2. Actual keyword/ranking data from a connected ASO source
+3. Competitor/category evidence
+4. Search-demand signals
+5. Product/search-intent reasoning
+6. Generic ASO best practices
+
+Do not reverse this hierarchy.
+
+---
+
+# Discovery vs conversion
+
+Always distinguish:
+
+### Discovery problem
+
+The app is not getting enough relevant exposure.
+
+Potential ASO response:
+
+- Title
+- Subtitle
+- Keywords
+- Search-intent targeting
+
+### Conversion problem
+
+The app gets exposure but does not convert.
+
+Do not automatically assume a keyword problem.
+
+Within this skill's scope, consider whether Title/Subtitle positioning may be contributing to the conversion problem.
+
+Do not claim that a keyword change will fix a problem that the available evidence does not support.
+
+---
+
+# New platform / Mac launch
+
+If an existing iOS app is expanding to macOS:
+
+Treat this as a new product capability, not a reason to restart ASO.
+
+Evaluate:
+
+- Whether Mac creates new search intent.
+- Whether "Mac" or "macOS" is a valuable search term.
+- Whether desktop-related terminology is relevant.
+- Whether Title should change.
+- Whether Subtitle should change.
+- Whether Keywords should include platform-specific terms.
+
+The absence of historical data for a newly launched platform is expected.
+
+Do not reject a Mac-related opportunity merely because historical keyword data does not exist.
+
+But do not add "Mac" everywhere simply because the app has a Mac version.
+
+The term must have a defensible search or positioning reason.
+
+---
+
+# Step 7 — Validate the final configuration
+
+Before producing the final recommendation, validate:
+
+- Title character limit
+- Subtitle character limit
+- Keyword-field limit
+- No unnecessary duplication
+- No irrelevant terms
+- No unsupported product claims
+- No prohibited terms
+- Correct locale/language
+- Correct script
+- Correct keyword separation
+- Actual app capability
+- Appropriate platform terminology
+
+Always use a script to validate character/byte constraints rather than relying on visual counting.
+
+---
+
+# Step 8 — Produce the final decision
+
+Do not give the user a giant research dump.
+
+The analysis can be detailed internally, but the final recommendation must be decisive.
+
+Output:
+
+## FINAL ASO TO SHIP
+
+### App Name / Title
+
+```text
+<exact final value>
+```
+
+### Subtitle
+
+```text
+<exact final value>
+```
+
+### Keywords
+
+```text
+<exact final keyword field>
+```
+
+---
+
+# Change summary
+
+| Field | Current | Final | Decision |
+|---|---|---|---|
+| Title | ... | ... | KEEP / CHANGE |
+| Subtitle | ... | ... | KEEP / CHANGE |
+| Keywords | ... | ... | KEEP / CHANGE |
+
+For every CHANGE, provide the specific reason.
+
+For every KEEP, provide a concise reason.
+
+---
+
+# Final confidence
+
+Provide:
+
+**Overall confidence:** High / Medium / Low
+
+**Biggest opportunity:** ...
+
+**Biggest risk:** ...
+
+**What to monitor after release:** ...
+
+---
+
+# Final ASO quality gate
+
+Before finalizing, verify:
+
+- The Title is within Apple's current limit.
+- The Subtitle is within Apple's current limit.
+- The Keyword field is within Apple's current limit.
+- Title + Subtitle + Keywords form a coherent strategy.
+- No unnecessary keyword duplication.
+- No irrelevant keywords.
+- No unsupported features are implied.
+- Existing successful terms were not removed without justification.
+- New keywords have a defensible reason.
+- New-app recommendations are based on market/search/competitor evidence.
+- Existing-app recommendations use actual performance evidence wherever available.
+- Mac/platform terms are included only when justified.
+- The final values are directly copy-pasteable into App Store Connect.
+
+Verify Apple's current metadata rules against the latest official Apple documentation whenever needed.
+
+---
+
+# WRITE / PUSH BEHAVIOR
+
+The analysis and the write operation are separate.
+
+First produce the final recommended:
+
+- Title
+- Subtitle
+- Keywords
+
+Show the before/after diff.
+
+Do not push metadata until the user explicitly approves the final configuration or explicitly instructs you to proceed.
+
+When approved, use the existing metadata-push tooling.
+
+The write step must:
+
+1. Pull the current live/draft metadata again.
+2. Generate a final diff.
+3. Validate character/byte limits.
+4. Validate locale.
+5. Require explicit confirmation unless the user has already explicitly authorized the push.
+6. Push only the approved fields.
+7. Report exactly what was changed.
+
+Never silently modify unrelated metadata.
+
+---
+
+# Important behavioral rules
+
+### Do NOT:
+
+- Generate keyword lists without making decisions.
+- Optimize purely for search volume.
+- Treat third-party scores as ground truth.
+- Rewrite existing ASO without evidence.
+- Preserve weak ASO merely because it is old.
+- Fill unused keyword capacity with filler.
+- Add keywords for unsupported features.
+- Add "Mac" merely because a Mac app exists.
+- Claim Apple provides organic per-keyword ranking data when it does not.
+- Pretend unavailable historical analytics exist.
+- Ask the user to choose between dozens of options.
+
+### DO:
+
+- Research.
+- Audit.
+- Compare.
+- Reason.
+- Make decisions.
+- Preserve what works.
+- Replace what is weak.
+- Identify gaps.
+- Validate the final metadata.
+- Give ONE final ASO configuration.
+- Make the result directly shippable.
+
+The final responsibility is:
+
+**Research → Audit → Decide → Validate → Ship-ready ASO.**
+
+---
+
+# Scripts this skill uses
 
 In this repo (read-only — pulls data, never writes):
 - `scripts/asc_client.py` — shared JWT auth (requires an **Admin-role** API
@@ -240,7 +780,8 @@ In this repo (read-only — pulls data, never writes):
 - `scripts/pull_asc_analytics.py` — impressions/conversion (forward-only,
   no backfill).
 - `scripts/pull_asc_sales.py` — real download and subscription history
-  (`downloads` and `subscribers` subcommands).
+  (`downloads` and `subscribers` subcommands — see the trap noted in Step 2
+  above before assuming an empty `downloads` result means no revenue).
 
 In the companion repo (the write step, kept separate on purpose):
 - [`appstore-connect-metadata-uploader`](https://github.com/mhassanali89/appstore-connect-metadata-uploader)'s

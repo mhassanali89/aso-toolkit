@@ -47,10 +47,10 @@ still apply:
   constraint (Sales/Analytics report requests both require it), not
   something this toolkit imposes — treat that key with the same care as any
   other Admin credential.
-- Read `.claude/skills/aso-audit/SKILL.md`'s "Common pitfalls" section
-  before relying on this for a real release — it covers the mistakes that
-  are easiest to make with this kind of audit (wrong report type,
-  over-aggressive keyword removal) so you don't have to hit them yourself.
+- Read `.claude/skills/aso-audit/SKILL.md`'s "Important behavioral rules"
+  section before relying on this for a real release — it's a concise list
+  of what the audit must never do (invent evidence, fill fields with
+  filler, assume Apple exposes data it doesn't).
 
 ## Setup
 
@@ -76,7 +76,7 @@ export ASC_VENDOR_NUMBER=12345678                              # Reports -> Sale
 | `scripts/asc_client.py` | Shared JWT auth + a thin API wrapper. Everything else imports this. |
 | `scripts/pull_asc_analytics.py` | Impressions / product page views / conversion. **Forward-only — no historical backfill**, see script docstring. |
 | `scripts/pull_asc_sales.py` | Real download and subscription/revenue history, back to app launch. |
-| `.claude/skills/aso-audit/SKILL.md` | The full audit methodology as a [Claude Code skill](https://docs.claude.com/en/docs/claude-code/skills) — drop this repo's `.claude/skills/` folder into your own project and Claude Code will use it automatically when asked to review ASO. Useful as a written methodology even if you don't use Claude Code. |
+| `.claude/skills/aso-audit/SKILL.md` | The full ASO methodology as a [Claude Code skill](https://docs.claude.com/en/docs/claude-code/skills), scoped specifically to Title/Subtitle/Keywords — covers both auditing an existing app's live metadata and building initial ASO for a brand-new listing. Drop this repo's `.claude/skills/` folder into your own project and Claude Code uses it automatically when asked to review ASO. Useful as a written methodology even if you don't use Claude Code. |
 
 Ready to write the changes you've decided on? That's
 [`appstore-connect-metadata-uploader`](https://github.com/mhassanali89/appstore-connect-metadata-uploader),
