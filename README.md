@@ -116,8 +116,28 @@ python3 scripts/keyword_research.py validate --title "..." --subtitle "..." --ke
 pip install pyjwt cryptography requests
 ```
 
-Generate an App Store Connect API key: **App Store Connect → Users and
-Access → Integrations → App Store Connect API → Generate**, role **Admin**.
+Connect your account — five minutes, done once:
+
+1. Go to **App Store Connect → Users and Access → Integrations → App Store
+   Connect API** ([direct link](https://appstoreconnect.apple.com/access/integrations/api)).
+2. Click **Generate API Key** (or the **+** button if you already have
+   other keys).
+3. Give it a name, set **Access** to **Admin**, click **Generate**.
+4. Grab three things off that page:
+   - **Issuer ID** — shown at the top of the Keys tab, the same for every
+     key on the account, not just this one.
+   - **Key ID** — shown next to the key you just created.
+   - **Download API Key** — click it once. Apple only lets you download
+     the `.p8` file a single time; if you miss it, you have to revoke the
+     key and generate a new one.
+5. Move the downloaded `.p8` file somewhere **outside any git repo** — your
+   home folder, a password manager's file storage, anywhere that isn't
+   going to get `git add`ed by accident.
+6. Two more values you'll want, both easy to find once you're in:
+   - **App ID** — your app's numeric Apple ID, visible in the app's URL in
+     App Store Connect, or under **App Information**.
+   - **Vendor Number** — only needed for `pull_asc_sales.py` — shown at the
+     top of **App Store Connect → Reports → Sales and Trends**.
 
 ```bash
 export ASC_ISSUER_ID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
