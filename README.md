@@ -24,8 +24,8 @@ is the day-to-day reference for command syntax.
 Most ASO advice is generic keyword theory. This toolkit instead:
 
 - Pulls your app's **actual live** Title/Subtitle/Keywords from the API
-  before proposing anything (planning docs and memory both drift from what's
-  really live — this was learned the hard way, see the skill file).
+  before proposing anything — planning docs and memory both drift from
+  what's really live, often more than expected.
 - Pulls **real download and subscription history** (Sales Reports API — full
   history from app launch, not just "starting from today").
 - Distinguishes what Apple actually exposes from what it doesn't: there is
@@ -47,10 +47,10 @@ still apply:
   constraint (Sales/Analytics report requests both require it), not
   something this toolkit imposes — treat that key with the same care as any
   other Admin credential.
-- Read `.claude/skills/aso-audit/SKILL.md`'s "Mistakes already made" section
-  before relying on this for a real release — it documents concrete errors
-  made while building this (wrong report type, over-aggressive keyword
-  removal) specifically so you don't repeat them.
+- Read `.claude/skills/aso-audit/SKILL.md`'s "Common pitfalls" section
+  before relying on this for a real release — it covers the mistakes that
+  are easiest to make with this kind of audit (wrong report type,
+  over-aggressive keyword removal) so you don't have to hit them yourself.
 
 ## Setup
 
@@ -93,8 +93,9 @@ toolkit was built by hitting several of them directly).
 ## Disclaimer
 
 Not affiliated with or endorsed by Apple. "App Store Connect" and "Apple
-Search Ads" are trademarks of Apple Inc. Use at your own risk — this writes
-to your live App Store Connect account when you tell it to.
+Search Ads" are trademarks of Apple Inc. This repo only ever reads from your
+App Store Connect account — see the companion uploader repo's disclaimer if
+you're using that one, since that's the tool that writes.
 
 ## License
 
