@@ -91,9 +91,6 @@ still apply:
   requests on your own computer and talks directly to Apple's servers.
   There's no server this toolkit runs, nothing gets uploaded anywhere, and
   no one but you ever sees that key.
-- That key does need the **Admin** role — a real Apple requirement (Sales
-  and Analytics report requests both require it specifically), not
-  something this toolkit adds on top of Apple's own rules.
 - Read `.claude/skills/aso-audit/SKILL.md`'s "Important behavioral rules"
   section before relying on this for a real release — it's a concise list
   of what the audit must never do (invent evidence, fill fields with
