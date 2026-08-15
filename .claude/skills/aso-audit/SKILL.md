@@ -68,6 +68,43 @@ If the available data is insufficient, explicitly state that limitation.
 
 ---
 
+# Credentials — what actually needs them
+
+Two genuinely different tiers of work live in this repo, and only one of
+them touches App Store Connect at all:
+
+**No App Store Connect credentials needed** — `scripts/keyword_research.py`
+(keyword scoring, competitor lookup, and local Title/Subtitle/Keywords
+validation) runs entirely against Apple's public iTunes Search API plus
+local logic. This covers all of Mode A's research work and can supplement
+Mode B's keyword audit. If a user doesn't want to issue an App Store
+Connect API key, say so plainly and keep going in this mode — the research
+and validation tooling still works, in full, with their consent understood
+as "skip the live-account tier."
+
+**App Store Connect credentials required (Admin-role key)** —
+`pull_asc_analytics.py` and `pull_asc_sales.py` (this repo) and
+`push_aso_metadata.py` (the companion uploader repo). These need real
+account access because they do something the no-credentials tier
+structurally cannot: read *this specific app's* actual live metadata and
+real performance history, and write verified changes back. The reason to
+ask for this access is accuracy, not convenience — it's the only way to
+audit against what's actually live and shipping today rather than a
+best-guess draft, and the only way to know whether a change is justified by
+this app's own download/subscription history rather than market-wide
+estimates. Say exactly this when explaining why credentials are being
+requested; don't ask for them without stating what specifically requires
+them.
+
+If a user declines to provide App Store Connect credentials, the correct
+response is to keep working in the no-credentials tier and be explicit
+about what that means: recommendations will be grounded in market/keyword
+research rather than this app's own live account and history, and any
+final values will need to be copied into App Store Connect by hand rather
+than pushed. That's a real, usable mode — not a degraded apology.
+
+---
+
 # Step 0 — Determine the ASO mode
 
 Before doing the analysis, determine whether this is:
@@ -133,6 +170,10 @@ Analyze:
 
 Competitors are evidence of market language, not templates to copy.
 
+Use `scripts/keyword_research.py competitors "<term>" --country <cc>` to pull
+real, current apps ranking for a candidate search term — this needs no App
+Store Connect credentials, just public Apple data.
+
 ---
 
 ## A3. Build the keyword universe
@@ -179,6 +220,15 @@ Evaluate candidate keywords using:
 Do not simply choose the highest-volume keywords.
 
 For a new app, prioritize **realistic opportunities where the app can establish relevance and ranking**.
+
+`scripts/keyword_research.py score "term1,term2,..." --country <cc>` scores
+candidates (popularity/difficulty/opportunity) using public iTunes Search
+data — no App Store Connect credentials required. Treat these scores
+exactly as what they are: an estimate from public search-result signals,
+useful for narrowing a large candidate list down to realistic ones, not a
+real Apple performance number. Never present this output as if it were
+data about how the app itself is performing — it isn't; it's about the
+market the app would be competing in.
 
 ---
 
@@ -774,9 +824,16 @@ The final responsibility is:
 
 # Scripts this skill uses
 
-In this repo (read-only — pulls data, never writes):
-- `scripts/asc_client.py` — shared JWT auth (requires an **Admin-role** API
-  key — narrower roles 403 on report requests and metadata writes).
+No App Store Connect credentials needed — public Apple data + local logic:
+- `scripts/keyword_research.py` — `score` (popularity/difficulty/opportunity
+  estimates from iTunes Search), `competitors` (real apps currently ranking
+  for a term), `validate` (character limits + cross-field word-stem
+  duplication, no network call at all).
+
+Requires an **Admin-role** App Store Connect API key (read-only — pulls
+data, never writes):
+- `scripts/asc_client.py` — shared JWT auth. Narrower key roles 403 on
+  report requests and metadata writes.
 - `scripts/pull_asc_analytics.py` — impressions/conversion (forward-only,
   no backfill).
 - `scripts/pull_asc_sales.py` — real download and subscription history

@@ -1,9 +1,11 @@
 # App Store Connect ASO scripts
 
-Two scripts, one shared client, built from a real audit-and-fix pass on a live app
+Three scripts, one shared client, built from a real audit-and-fix pass on a live app
 (see `.claude/skills/aso-audit/SKILL.md` for the full methodology). Reusable for any
 app — nothing app-specific is hardcoded, everything comes from environment variables
-or CLI arguments.
+or CLI arguments. One of the three (`keyword_research.py`) needs no App Store Connect
+access at all — see its own section below before assuming you need an API key to get
+started.
 
 **Looking for the metadata upload script?** That's a separate repo:
 [`appstore-connect-metadata-uploader`](https://github.com/mhassanali89/appstore-connect-metadata-uploader)
@@ -11,7 +13,34 @@ or CLI arguments.
 mandatory before/after diff and confirmation. This repo covers the *read* side:
 pulling real performance data to inform what you'd put in that CSV.
 
-## Setup
+## `keyword_research.py` — keyword scoring, competitors, validation (no credentials)
+
+Runs entirely against Apple's public, unauthenticated iTunes Search API plus local
+logic — nothing here touches your App Store Connect account, so there's no API key
+to set up for this one.
+
+```bash
+pip install requests
+
+# Score candidate keywords (popularity/difficulty/opportunity — see the script's
+# docstring for exactly how these are computed; they're estimates, not real
+# Apple performance data for any specific app)
+python3 keyword_research.py score "voice notes,note taking,transcription" --country us
+
+# Real apps currently ranking for a search term
+python3 keyword_research.py competitors "note taking app" --country us --limit 10
+
+# Character limits + cross-field word-stem duplication — pure local check,
+# no network call at all
+python3 keyword_research.py validate --title "..." --subtitle "..." --keywords "..."
+```
+
+The scoring formula is an original implementation, not a port of any
+third-party tool's algorithm — see the script's docstring for the exact
+signals it uses (result count, top-10 average rating count, exact-title
+match ratio) and why.
+
+## Setup (for the two scripts below — App Store Connect access required)
 
 ```bash
 pip install pyjwt cryptography requests
