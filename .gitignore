@@ -1,0 +1,17 @@
+# Credentials — never commit
+scripts/*.p8
+*.p8
+
+# Pulled/output data
+scripts/asc_reports/
+scripts/*.json
+scripts/*.csv
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# macOS
+.DS_Store
