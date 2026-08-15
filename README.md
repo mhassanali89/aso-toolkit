@@ -86,10 +86,14 @@ still apply:
 - Nothing in this repo contains credentials, app IDs, or any
   account-specific data — every identifier is an environment variable or a
   CLI argument you supply.
-- The API key this requires needs the **Admin** role. That's a real Apple
-  constraint (Sales/Analytics report requests both require it), not
-  something this toolkit imposes — treat that key with the same care as any
-  other Admin credential.
+- **Connect your own App Store Connect account for the full tier, and it
+  never leaves your machine.** Everything runs locally — your API key signs
+  requests on your own computer and talks directly to Apple's servers.
+  There's no server this toolkit runs, nothing gets uploaded anywhere, and
+  no one but you ever sees that key.
+- That key does need the **Admin** role — a real Apple requirement (Sales
+  and Analytics report requests both require it specifically), not
+  something this toolkit adds on top of Apple's own rules.
 - Read `.claude/skills/aso-audit/SKILL.md`'s "Important behavioral rules"
   section before relying on this for a real release — it's a concise list
   of what the audit must never do (invent evidence, fill fields with
